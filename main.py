@@ -153,16 +153,18 @@ def markup_handler(message):
                     if budget <0: bot.send_message(message.chat.id, texts.deltamonthmoneyNegMsg.format(budget))
             case texts.gettargettimeBtn:
                 userinfo = data.GetUserData(message.chat.id)
+                print("1")
                 if userinfo == False or (int(userinfo.monthincome) == 0 and int(userinfo.monthconsumption)): 
                     bot.send_message(message.chat.id,texts.undefindmonthMoney)
                 else:
                     budget =  int(userinfo.monthincome) - int(userinfo.monthconsumption)
+                    print(budget)
                     if int(userinfo.target) == 0: bot.send_message(message.chat.id,texts.undefindTarget)
                     elif budget > 0: 
                         time = str((int(userinfo.target)//budget)+1)
-                        if time[-1] == 1: text = time + ' месяц'
-                        if time[-1] > 1 and time[-1] < 5: text = time + ' месяцa'
-                        if time[-1] >= 5 or time[-1] == 0: text = time + ' месяцев'
+                        if int(time[-1]) == 1: text = time + ' месяц'
+                        if int(time[-1]) > 1 and int(time[-1]) < 5: text = time + ' месяцa'
+                        if int(time[-1]) >= 5 or int(time[-1]) == 0: text = time + ' месяцев'
 
                         bot.send_message(message.chat.id,texts.gettargettimeMsg.format(userinfo.target, text))
                     elif budget <=0: bot.send_message(message.chat.id,texts.errbudgetMsg)
