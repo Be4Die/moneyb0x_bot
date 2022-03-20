@@ -55,7 +55,7 @@ def addMonthMoney(message):
         arg = str(message.text.split(maxsplit=1)[1]).split(' ')
         arg = int(arg[0])
         data.SetUserMonthIncome(message.chat.id,arg)
-        bot.send_message(message.chat.id,texts.successaddmonthmoneyMsg().format(arg))
+        bot.send_message(message.chat.id,texts.successaddmonthmoneyMsg.format(arg))
     except: 
         success = False
 
